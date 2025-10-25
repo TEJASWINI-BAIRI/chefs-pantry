@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Chef's Pantry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f9fafb;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .user-info {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .welcome-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .welcome-section h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .welcome-section p {
+            color: #666;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .subscriptions-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .subscription-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .subscription-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+        }
+
+        .subscription-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .subscription-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #f3f4f6;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-paused {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .subscription-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+			padding: 0.7rem 1.2rem;
+			            border: none;
+			            border-radius: 8px;
+			            cursor: pointer;
+			            font-weight: 500;
+			            transition: transform 0.2s, box-shadow 0.2s;
+			            text-decoration: none;
+			            text-align: center;
+			        }
+
+			        .btn-pause {
+			            background: #fbbf24;
+			            color: white;
+			        }
+
+			        .btn-resume {
+			            background: #10b981;
+			            color: white;
+			        }
+
+			        .btn-cancel {
+			            background: #ef4444;
+			            color: white;
+			        }
+
+			        .action-btn:hover {
+			            transform: translateY(-2px);
+			            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+			        }
+
+			        .empty-state {
+			            text-align: center;
+			            padding: 4rem 2rem;
+			            background: white;
+			            border-radius: 15px;
+			            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+			        }
+
+			        .empty-state-icon {
+			            font-size: 4rem;
+			            margin-bottom: 1rem;
+			        }
+
+			        .btn-primary {
+			            display: inline-block;
+			            padding: 1rem 2rem;
+			            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			            color: white;
+			            text-decoration: none;
+			            border-radius: 10px;
+			            font-weight: bold;
+			            margin-top: 1rem;
+			            transition: transform 0.3s, box-shadow 0.3s;
+			        }
+
+			        .btn-primary:hover {
+			            transform: translateY(-2px);
+			            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+			        }
+
+			        @media (max-width: 768px) {
+			            .subscription-card {
+			                grid-template-columns: 1fr;
+			                text-align: center;
+			            }
+
+			            .subscription-actions {
+			                flex-direction: row;
+			                justify-content: center;
+			            }
+			        }
+			    </style>
+			</head>
+			<body>
+			    <!-- Navigation -->
+				<!-- Navigation -->
+				<nav>
+				    <div class="nav-container">
+				        <a href="/" class="logo">🍳 Chef's Pantry</a>
+				        <ul class="nav-links">
+				            <li><a href="/">Home</a></li>
+				            <li><a href="/mealkits">Browse Meal Kits</a></li>
+				            <li><a href="/user/dashboard">My Dashboard</a></li>
+				            <li class="user-info">
+				                <span>👤</span>
+				                <span th:text="${user.fullName}">User Name</span>
+				            </li>
+				            <li><a href="/user/logout">Logout</a></li>
+				        </ul>
+				    </div>
+				</nav>
+
+			    <!-- Dashboard Content -->
+			    <div class="dashboard-container">
+			        <div class="welcome-section">
+			            <h1>Welcome back, <span th:text="${user.fullName}">User</span>! 👋</h1>
+			            <p>Manage your meal kit subscriptions and preferences</p>
+			        </div>
+
+			        <!-- Success/Error Messages -->
+			        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+			        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+			        <!-- Subscriptions Section -->
+			        <h2 class="section-title">My Subscriptions</h2>
+
+			        <div class="subscriptions-grid" th:if="${subscriptions != null and !subscriptions.isEmpty()}">
+			            <div class="subscription-card" th:each="sub : ${subscriptions}">
+			                <div class="subscription-icon">🍽️</div>
+			                
+			                <div class="subscription-details">
+			                    <h3 th:text="${sub.mealKit.name}">Meal Kit Name</h3>
+			                    <div class="subscription-info">
+			                        <span class="info-badge">
+			                            <span>💰</span>
+			                            <span th:text="'₹' + ${sub.mealKit.price}">₹599</span>
+			                        </span>
+			                        <span class="info-badge">
+			                            <span>📅</span>
+			                            <span th:text="${sub.frequency}">Weekly</span>
+			                        </span>
+			                        <span class="info-badge" th:if="${sub.nextDelivery != null}">
+			                            <span>🚚</span>
+			                            <span>Next: <span th:text="${#temporals.format(sub.nextDelivery, 'MMM dd')}">Jan 15</span></span>
+			                        </span>
+			                    </div>
+			                    <div class="subscription-info" style="margin-top: 0.5rem;">
+			                        <span class="info-badge">
+			                            <span>📍</span>
+			                            <span th:text="${sub.deliveryAddress}">Delivery Address</span>
+			                        </span>
+			                    </div>
+			                </div>
+
+			                <div class="subscription-actions">
+			                    <span class="status-badge" 
+			                          th:classappend="${sub.status == 'ACTIVE' ? 'status-active' : (sub.status == 'PAUSED' ? 'status-paused' : 'status-cancelled')}"
+			                          th:text="${sub.status}">ACTIVE</span>
+			                    
+			                    <form th:if="${sub.status == 'ACTIVE'}" 
+			                          th:action="@{/mealkits/subscription/{id}/pause(id=${sub.id})}" 
+			                          method="post" style="display: inline;">
+			                        <button type="submit" class="action-btn btn-pause">⏸️ Pause</button>
+			                    </form>
+			                    
+			                    <form th:if="${sub.status == 'PAUSED'}" 
+			                          th:action="@{/mealkits/subscription/{id}/resume(id=${sub.id})}" 
+			                          method="post" style="display: inline;">
+			                        <button type="submit" class="action-btn btn-resume">▶️ Resume</button>
+			                    </form>
+			                    
+			                    <form th:if="${sub.status != 'CANCELLED'}" 
+			                          th:action="@{/mealkits/subscription/{id}/cancel(id=${sub.id})}" 
+			                          method="post" style="display: inline;">
+			                        <button type="submit" class="action-btn btn-cancel" 
+			                                onclick="return confirm('Are you sure you want to cancel this subscription?')">
+			                            ❌ Cancel
+			                        </button>
+			                    </form>
+			                </div>
+			            </div>
+			        </div>
+
+			        <div class="empty-state" th:if="${subscriptions == null or subscriptions.isEmpty()}">
+			            <div class="empty-state-icon">📭</div>
+			            <h3>No Active Subscriptions</h3>
+			            <p>Start your culinary journey by subscribing to a meal kit</p>
+			            <a href="/mealkits" class="btn-primary">Browse Meal Kits</a>
+			        </div>
+			    </div>
+			</body>
+			</html>
