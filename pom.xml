@@ -11,8 +11,9 @@
 	<groupId>com.example</groupId>
 	<artifactId>ChefPantryApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>ChefPantryApp</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Chef's Pantry Application - Recipe and Ingredient Management</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -28,6 +29,8 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,10 +65,22 @@
 	</dependencies>
 
 	<build>
+		<finalName>ChefPantryApp</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>17</source>
+					<target>17</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
