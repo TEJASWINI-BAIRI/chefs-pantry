@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meal Kits - Chef's Pantry</title>
+    <title>Manage Meal Kits - Admin</title>
     <style>
         * {
             margin: 0;
@@ -17,6 +17,7 @@
             min-height: 100vh;
         }
 
+        /* Navigation */
         nav {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 1rem 0;
@@ -24,7 +25,7 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -57,66 +58,90 @@
             opacity: 0.8;
         }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
         }
 
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
         }
 
         .page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            color: #333;
         }
 
-        .page-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
 
-        .meal-kits-grid {
+        .alert {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Meal Kits Grid */
+        .mealkits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .meal-kit-card {
+        .mealkit-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
 
-        .meal-kit-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        .mealkit-card:hover {
+            transform: translateY(-5px);
         }
 
-        .meal-kit-image-container {
+        .mealkit-image-container {
             width: 100%;
-            height: 250px;
+            height: 200px;
             position: relative;
             overflow: hidden;
         }
 
-        .meal-kit-image-placeholder {
+        .mealkit-image-placeholder {
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -127,80 +152,72 @@
             color: white;
         }
 
-        .meal-kit-image-container img {
+        .mealkit-image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
 
-        .meal-kit-content {
+        .mealkit-content {
             padding: 1.5rem;
         }
 
-        .meal-kit-category {
-            display: inline-block;
-            background: #e0e7ff;
-            color: #667eea;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .meal-kit-title {
-            font-size: 1.5rem;
+        .mealkit-content h3 {
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
             color: #333;
         }
 
-        .meal-kit-description {
+        .mealkit-content p {
             color: #666;
             margin-bottom: 1rem;
             line-height: 1.6;
-            min-height: 48px;
         }
 
-        .meal-kit-meta {
+        .mealkit-meta {
             display: flex;
-            gap: 1rem;
+            justify-content: space-between;
             margin-bottom: 1rem;
             font-size: 0.9rem;
             color: #666;
         }
 
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .meal-kit-price {
-            font-size: 1.8rem;
+        .price {
+            font-size: 1.5rem;
             font-weight: bold;
             color: #667eea;
             margin-bottom: 1rem;
         }
 
-        .subscribe-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .mealkit-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-edit {
+            flex: 1;
+            padding: 0.7rem;
+            background: #3b82f6;
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 500;
         }
 
-        .subscribe-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        .btn-delete {
+            flex: 1;
+            padding: 0.7rem;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
         }
 
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -210,20 +227,33 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.6);
+            overflow-y: auto;
         }
 
         .modal-content {
             background: white;
-            margin: 5% auto;
+            margin: 3% auto;
             padding: 2rem;
             border-radius: 20px;
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: #333;
         }
 
         .close {
             color: #aaa;
-            float: right;
             font-size: 2rem;
             font-weight: bold;
             cursor: pointer;
@@ -232,13 +262,6 @@
 
         .close:hover {
             color: #000;
-        }
-
-        .modal h2 {
-            margin-bottom: 1.5rem;
-            color: #333;
-            clear: both;
-            padding-top: 0.5rem;
         }
 
         .form-group {
@@ -252,8 +275,9 @@
             font-weight: 500;
         }
 
-        .form-group select,
-        .form-group textarea {
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 0.9rem;
             border: 2px solid #e2e8f0;
@@ -262,71 +286,81 @@
             font-family: inherit;
         }
 
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
         }
 
-        .alert {
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
+        .help-text {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.3rem;
         }
 
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
+        .help-text code {
+            background: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-        }
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
 
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            .page-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="/" class="logo">🍳 Chef's Pantry</a>
+            <a href="/admin/dashboard" class="logo">🍳 Chef's Pantry Admin</a>
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/mealkits">Meal Kits</a></li>
-                <li th:if="${isLoggedIn}" class="user-info">
-                    <span>👤</span>
-                    <span th:text="${session.user?.fullName}">User</span>
-                </li>
-                <li th:if="${isLoggedIn}"><a href="/user/dashboard">My Dashboard</a></li>
-                <li th:if="${!isLoggedIn}"><a href="/login-choice">Login</a></li>
-                <li th:if="${isLoggedIn}"><a href="/user/logout">Logout</a></li>
+                <li><a href="/admin/dashboard">Dashboard</a></li>
+                <li><a href="/admin/mealkits">Manage Meal Kits</a></li>
+                <li><a href="/user/logout">Logout</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="page-header">
-        <h1>Our Meal Kits</h1>
-        <p>Explore our collection of chef-curated meal kits</p>
-    </div>
-
+    <!-- Main Content -->
     <div class="container">
+        <div class="page-header">
+            <h1>Manage Meal Kits</h1>
+            <button class="btn" onclick="openAddModal()">+ Add New Meal Kit</button>
+        </div>
+
+        <!-- Success/Error Messages -->
         <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
         <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
 
-        <div class="meal-kits-grid" th:if="${mealKits != null and !mealKits.isEmpty()}">
-            <div class="meal-kit-card" th:each="kit : ${mealKits}">
-                <div class="meal-kit-image-container">
-                    <!-- Show emoji placeholder if no image URL -->
-                    <div class="meal-kit-image-placeholder" 
+        <!-- Meal Kits Grid -->
+        <div class="mealkits-grid" th:if="${mealKits != null and !mealKits.isEmpty()}">
+            <div class="mealkit-card" th:each="kit : ${mealKits}">
+                <div class="mealkit-image-container">
+                    <!-- Show emoji if no image URL provided -->
+                    <div class="mealkit-image-placeholder" 
                          th:if="${kit.imageUrl == null or #strings.isEmpty(kit.imageUrl)}">
                         🍽️
                     </div>
@@ -334,126 +368,168 @@
                     <img th:if="${kit.imageUrl != null and !#strings.isEmpty(kit.imageUrl)}" 
                          th:src="${kit.imageUrl}" 
                          th:alt="${kit.name}"
-                         onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'meal-kit-image-placeholder\'>🍽️</div>'">
+                         onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'mealkit-image-placeholder\'>🍽️</div>'">
                 </div>
-                
-                <div class="meal-kit-content">
-                    <span class="meal-kit-category" th:text="${kit.category ?: 'Gourmet'}">Italian</span>
-                    <h3 class="meal-kit-title" th:text="${kit.name}">Meal Kit</h3>
-                    <p class="meal-kit-description" th:text="${kit.description}">Description</p>
-                    
-                    <div class="meal-kit-meta">
-                        <div class="meta-item">
-                            <span>👥</span>
-                            <span th:text="${kit.servings} + ' servings'">2 servings</span>
-                        </div>
-                        <div class="meta-item" th:if="${kit.prepTime != null}">
-                            <span>⏱️</span>
-                            <span th:text="${kit.prepTime} + ' min'">30 min</span>
-                        </div>
+
+                <div class="mealkit-content">
+                    <h3 th:text="${kit.name}">Meal Kit Name</h3>
+                    <p th:text="${kit.description}">Description</p>
+
+                    <div class="mealkit-meta">
+                        <span th:text="'Category: ' + (${kit.category} != null ? ${kit.category} : 'N/A')">Category: Italian</span>
+                        <span th:text="${kit.servings} + ' servings'">2 servings</span>
                     </div>
-                    
-                    <div class="meal-kit-price" th:text="'₹' + ${kit.price}">₹599</div>
-                    
-                    <button class="subscribe-btn" 
-                            th:data-kit-id="${kit.id}"
-                            th:data-kit-name="${kit.name}"
-                            onclick="openModalFromButton(this)">
-                        Subscribe Now
-                    </button>
+
+                    <div class="price" th:text="'₹' + ${kit.price}">₹599</div>
+
+                    <div class="mealkit-actions">
+                        <button class="btn-edit" type="button" th:onclick="'openEditModal(' + ${kit.id} + ')'">✏️ Edit</button>
+                        <form th:action="@{/admin/mealkits/delete/{id}(id=${kit.id})}" method="post" style="flex: 1;">
+                            <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this meal kit?')">
+                                🗑️ Delete
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="empty-state" th:if="${mealKits == null or mealKits.isEmpty()}">
-            <div class="empty-state-icon">📭</div>
-            <h2>No meal kits available</h2>
-            <p>Check back soon!</p>
+        <div th:if="${mealKits == null or mealKits.isEmpty()}" style="text-align: center; padding: 4rem; background: white; border-radius: 15px;">
+            <p style="font-size: 3rem; margin-bottom: 1rem;">📭</p>
+            <h3>No meal kits yet</h3>
+            <p style="color: #666; margin-top: 0.5rem;">Click "Add New Meal Kit" to get started</p>
         </div>
     </div>
 
-    <div id="subscriptionModal" class="modal">
+    <!-- Add/Edit Modal -->
+    <div id="mealKitModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Subscribe to <span id="modalMealKitName"></span></h2>
-            
-            <form action="/mealkits/subscribe" method="post">
-                <input type="hidden" id="mealKitId" name="mealKitId">
-                
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Meal Kit</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+
+            <form id="mealKitForm" action="/admin/mealkits/add" method="post">
+                <input type="hidden" id="kitId" name="id">
+
                 <div class="form-group">
-                    <label for="frequency">Delivery Frequency *</label>
-                    <select id="frequency" name="frequency" required>
-                        <option value="">Choose frequency...</option>
-                        <option value="WEEKLY">Weekly - Every 7 days</option>
-                        <option value="MONTHLY">Monthly - Every 30 days</option>
+                    <label for="name">Meal Kit Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="e.g., Gourmet Pasta Kit">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" name="description" required placeholder="Describe the meal kit..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="price">Price (₹) *</label>
+                        <input type="number" id="price" name="price" step="0.01" required placeholder="599">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category">
+                            <option value="">Select category</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Asian">Asian</option>
+                            <option value="Indian">Indian</option>
+                            <option value="American">American</option>
+                            <option value="Mediterranean">Mediterranean</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="servings">Servings</label>
+                        <input type="number" id="servings" name="servings" placeholder="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="prepTime">Prep Time (minutes)</label>
+                        <input type="number" id="prepTime" name="prepTime" placeholder="30">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ingredients">Ingredients (comma-separated)</label>
+                    <textarea id="ingredients" name="ingredients" placeholder="Pasta, Tomatoes, Garlic, Olive Oil, Basil"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="instructions">Cooking Instructions</label>
+                    <textarea id="instructions" name="instructions" placeholder="Step-by-step cooking instructions..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUrl">Image URL</label>
+                    <input type="text" id="imageUrl" name="imageUrl" placeholder="/images/pasta.jpg or https://example.com/image.jpg">
+                    <div class="help-text">
+                        💡 For static images: Use <code>/images/filename.jpg</code><br>
+                        💡 For external images: Use full URL like <code>https://example.com/image.jpg</code>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="available">Availability</label>
+                    <select id="available" name="available">
+                        <option value="true">Available</option>
+                        <option value="false">Not Available</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="deliveryAddress">Delivery Address *</label>
-                    <textarea id="deliveryAddress" name="deliveryAddress" 
-                           placeholder="Enter your complete delivery address" 
-                           required rows="3"></textarea>
-                </div>
-
-                <button type="submit" class="subscribe-btn">Confirm Subscription</button>
+                <button type="submit" class="btn">Save Meal Kit</button>
             </form>
         </div>
     </div>
 
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeLoginModal()">&times;</span>
-            <h2>🔐 Login Required</h2>
-            <p style="margin-bottom: 1.5rem; color: #666; text-align: center;">
-                Please login to subscribe to meal kits!
-            </p>
-            <a href="/login-choice" class="subscribe-btn" style="display: block; text-align: center; text-decoration: none;">
-                Go to Login
-            </a>
-        </div>
-    </div>
-
     <script th:inline="javascript">
-      
-        var isUserLoggedIn = /*[[${isLoggedIn}]]*/ false;
-        
-        function openModalFromButton(button) {
-            const kitId = button.getAttribute('data-kit-id');
-            const kitName = button.getAttribute('data-kit-name');
-            openModal(kitId, kitName, isUserLoggedIn);
+        /*<![CDATA[*/
+        const mealKits = /*[[${mealKits}]]*/ [];
+
+        function openAddModal() {
+            document.getElementById('modalTitle').textContent = 'Add New Meal Kit';
+            document.getElementById('mealKitForm').action = '/admin/mealkits/add';
+            document.getElementById('mealKitForm').reset();
+            document.getElementById('kitId').value = '';
+            document.getElementById('mealKitModal').style.display = 'block';
         }
-        
-        function openModal(kitId, kitName, isLoggedIn) {
-            if (!isLoggedIn) {
-                document.getElementById('loginModal').style.display = 'block';
-                return;
-            }
-            
-            document.getElementById('mealKitId').value = kitId;
-            document.getElementById('modalMealKitName').textContent = kitName;
-            document.getElementById('subscriptionModal').style.display = 'block';
+
+        function openEditModal(kitId) {
+            const kit = mealKits.find(k => k.id === kitId);
+            if (!kit) return;
+
+            document.getElementById('modalTitle').textContent = 'Edit Meal Kit';
+            document.getElementById('mealKitForm').action = '/admin/mealkits/update/' + kitId;
+
+            document.getElementById('kitId').value = kit.id;
+            document.getElementById('name').value = kit.name || '';
+            document.getElementById('description').value = kit.description || '';
+            document.getElementById('price').value = kit.price || '';
+            document.getElementById('category').value = kit.category || '';
+            document.getElementById('servings').value = kit.servings || '';
+            document.getElementById('prepTime').value = kit.prepTime || '';
+            document.getElementById('ingredients').value = kit.ingredients || '';
+            document.getElementById('instructions').value = kit.instructions || '';
+            document.getElementById('imageUrl').value = kit.imageUrl || '';
+            document.getElementById('available').value = kit.available ? 'true' : 'false';
+
+            document.getElementById('mealKitModal').style.display = 'block';
         }
 
         function closeModal() {
-            document.getElementById('subscriptionModal').style.display = 'none';
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('mealKitModal').style.display = 'none';
         }
 
         window.onclick = function(event) {
-            const subscriptionModal = document.getElementById('subscriptionModal');
-            const loginModal = document.getElementById('loginModal');
-            
-            if (event.target == subscriptionModal) {
+            const modal = document.getElementById('mealKitModal');
+            if (event.target === modal) {
                 closeModal();
             }
-            if (event.target == loginModal) {
-                closeLoginModal();
-            }
         }
+        /*]]>*/
     </script>
 </body>
 </html>
