@@ -405,7 +405,6 @@
 		    }
 		}
 
-		/* ===== VERY SMALL MOBILE (360px and below) ===== */
 		@media (max-width: 360px) {
 		    .nav-container {
 		        padding: 0 0.5rem !important;
@@ -450,10 +449,8 @@
         <h2>Welcome Back!</h2>
         <p class="subtitle">Login to manage your meal kit subscriptions</p>
 
-        <!-- Success Message -->
         <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
         
-        <!-- Error Message -->
         <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
 
         <form action="/user/login" method="post">
