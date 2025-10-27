@@ -2,10 +2,433 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Chef's Pantry</title>
-    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 2rem;
+		}
+		.login-container {
+		        background: white;
+		        padding: 3rem;
+		        border-radius: 20px;
+		        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+		        max-width: 450px;
+		        width: 100%;
+		        animation: slideUp 0.5s ease;
+		    }
+
+		    @keyframes slideUp {
+		        from {
+		            opacity: 0;
+		            transform: translateY(30px);
+		        }
+		        to {
+		            opacity: 1;
+		            transform: translateY(0);
+		        }
+		    }
+
+		    .logo {
+		        text-align: center;
+		        font-size: 2.5rem;
+		        margin-bottom: 0.5rem;
+		    }
+
+		    h2 {
+		        text-align: center;
+		        color: #333;
+		        margin-bottom: 0.5rem;
+		    }
+
+		    .admin-badge {
+		        text-align: center;
+		        display: inline-block;
+		        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		        color: white;
+		        padding: 0.5rem 1rem;
+		        border-radius: 20px;
+		        font-size: 0.9rem;
+		        font-weight: 600;
+		        margin: 0 auto 1.5rem;
+		        display: block;
+		        width: fit-content;
+		    }
+
+		    .subtitle {
+		        text-align: center;
+		        color: #666;
+		        margin-bottom: 2rem;
+		    }
+
+		    .form-group {
+		        margin-bottom: 1.5rem;
+		    }
+
+		    label {
+		        display: block;
+		        margin-bottom: 0.5rem;
+		        color: #333;
+		        font-weight: 500;
+		    }
+
+		    input {
+		        width: 100%;
+		        padding: 0.9rem;
+		        border: 2px solid #e2e8f0;
+		        border-radius: 10px;
+		        font-size: 1rem;
+		        transition: border-color 0.3s;
+		    }
+
+		    input:focus {
+		        outline: none;
+		        border-color: #667eea;
+		    }
+
+		    .btn {
+		        width: 100%;
+		        padding: 1rem;
+		        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		        color: white;
+		        border: none;
+		        border-radius: 10px;
+		        font-size: 1.1rem;
+		        font-weight: bold;
+		        cursor: pointer;
+		        transition: transform 0.3s, box-shadow 0.3s;
+		    }
+
+		    .btn:hover {
+		        transform: translateY(-2px);
+		        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+		    }
+
+		    .back-link {
+		        text-align: center;
+		        margin-top: 1.5rem;
+		    }
+
+		    .back-link a {
+		        color: #667eea;
+		        text-decoration: none;
+		        font-size: 0.9rem;
+		    }
+
+		    .back-link a:hover {
+		        text-decoration: underline;
+		    }
+
+		    .alert {
+		        padding: 1rem;
+		        border-radius: 10px;
+		        margin-bottom: 1.5rem;
+		        font-weight: 500;
+		    }
+
+		    .alert-error {
+		        background: #f8d7da;
+		        color: #721c24;
+		        border: 1px solid #f5c6cb;
+		    }
+
+		    .security-note {
+		        background: #fff3cd;
+		        border: 1px solid #ffc107;
+		        color: #856404;
+		        padding: 1rem;
+		        border-radius: 10px;
+		        margin-bottom: 1.5rem;
+		        font-size: 0.9rem;
+		    }
+			@media (max-width: 768px) {
+			    /* Navigation */
+			    .nav-container {
+			        padding: 0 1rem !important;
+			        flex-wrap: wrap;
+			    }
+
+			    .logo {
+			        font-size: 1.3rem !important;
+			    }
+
+			    .nav-links {
+			        gap: 0.8rem !important;
+			        font-size: 0.85rem !important;
+			    }
+
+			    .user-info {
+			        padding: 0.4rem 0.8rem !important;
+			        font-size: 0.85rem !important;
+			    }
+
+			    /* Page Headers */
+			    .page-header,
+			    .hero {
+			        padding: 3rem 1.5rem !important;
+			    }
+
+			    .page-header h1,
+			    .hero h1 {
+			        font-size: 2rem !important;
+			        line-height: 1.2;
+			    }
+
+			    .page-header p,
+			    .hero p {
+			        font-size: 1rem !important;
+			    }
+
+			    /* Containers */
+			    .container,
+			    .dashboard-container {
+			        padding: 2rem 1rem !important;
+			    }
+
+			    /* Grids */
+			    .meal-kits-grid,
+			    .mealkits-grid,
+			    .feature-grid,
+			    .stats-grid,
+			    .subscriptions-grid {
+			        grid-template-columns: 1fr !important;
+			        gap: 1.5rem !important;
+			    }
+
+			    /* Cards */
+			    .meal-kit-card,
+			    .mealkit-card,
+			    .feature-card,
+			    .subscription-card {
+			        max-width: 100%;
+			    }
+
+			    .meal-kit-image-container,
+			    .mealkit-image {
+			        height: 220px !important;
+			    }
+
+			    .meal-kit-content,
+			    .mealkit-content {
+			        padding: 1.2rem !important;
+			    }
+
+			    .subscription-card {
+			        grid-template-columns: 1fr !important;
+			        text-align: center;
+			    }
+
+			    .subscription-icon {
+			        margin: 0 auto;
+			    }
+
+			    .subscription-actions {
+			        flex-direction: row;
+			        justify-content: center;
+			    }
+
+			    /* Buttons & CTAs */
+			    .cta-buttons {
+			        flex-direction: column !important;
+			        gap: 1rem !important;
+			    }
+
+			    .btn,
+			    .btn-primary,
+			    .btn-secondary {
+			        width: 100% !important;
+			        padding: 0.9rem 1.5rem !important;
+			        font-size: 1rem !important;
+			    }
+
+			    /* Modals */
+			    .modal-content,
+			    .login-container,
+			    .register-container,
+			    .choice-container {
+			        width: 95% !important;
+			        padding: 1.5rem !important;
+			        margin: 10% auto !important;
+			    }
+
+			    .modal h2 {
+			        font-size: 1.3rem !important;
+			    }
+
+			    /* Forms */
+			    .form-group input,
+			    .form-group textarea,
+			    .form-group select {
+			        padding: 0.8rem !important;
+			        font-size: 0.95rem !important;
+			    }
+
+			    .form-row {
+			        grid-template-columns: 1fr !important;
+			        gap: 0 !important;
+			    }
+
+			    /* Tables */
+			    .table-container {
+			        overflow-x: auto;
+			        -webkit-overflow-scrolling: touch;
+			    }
+
+			    table {
+			        font-size: 0.85rem;
+			    }
+
+			    th, td {
+			        padding: 0.7rem 0.5rem !important;
+			    }
+
+			    /* Section Headers */
+			    .section-title,
+			    .features h2,
+			    .how-it-works h2 {
+			        font-size: 1.8rem !important;
+			        margin-bottom: 2rem !important;
+			    }
+
+			    .page-header {
+			        flex-direction: column !important;
+			        gap: 1rem !important;
+			        align-items: flex-start !important;
+			    }
+
+			    /* Login Options */
+			    .login-options {
+			        grid-template-columns: 1fr !important;
+			        gap: 1.5rem !important;
+			    }
+
+			    /* Steps */
+			    .steps {
+			        grid-template-columns: 1fr !important;
+			    }
+
+			    .step-number {
+			        width: 50px !important;
+			        height: 50px !important;
+			        font-size: 1.3rem !important;
+			    }
+
+			    /* Welcome Section */
+			    .welcome-section h1 {
+			        font-size: 1.6rem !important;
+			    }
+
+			    .welcome-section p {
+			        font-size: 0.95rem !important;
+			    }
+			}
+
+			/* ===== SMALL MOBILE (480px and below) ===== */
+			@media (max-width: 480px) {
+			    .logo {
+			        font-size: 1.1rem !important;
+			    }
+
+			    .nav-links {
+			        gap: 0.5rem !important;
+			        font-size: 0.75rem !important;
+			    }
+
+			    .page-header h1,
+			    .hero h1 {
+			        font-size: 1.6rem !important;
+			    }
+
+			    .page-header p,
+			    .hero p {
+			        font-size: 0.9rem !important;
+			    }
+
+			    .meal-kit-image-container,
+			    .mealkit-image {
+			        height: 200px !important;
+			    }
+
+			    .meal-kit-image-placeholder {
+			        font-size: 3rem !important;
+			    }
+
+			    .features h2,
+			    .how-it-works h2,
+			    .section-title {
+			        font-size: 1.5rem !important;
+			    }
+
+			    .feature-icon {
+			        font-size: 2.5rem !important;
+			    }
+
+			    .feature-card h3 {
+			        font-size: 1.1rem !important;
+			    }
+
+			    .subscription-card {
+			        padding: 1rem !important;
+			    }
+
+			    .stat-card {
+			        padding: 1.5rem !important;
+			    }
+
+			    .stat-value {
+			        font-size: 2rem !important;
+			    }
+			}
+
+			/* ===== VERY SMALL MOBILE (360px and below) ===== */
+			@media (max-width: 360px) {
+			    .nav-container {
+			        padding: 0 0.5rem !important;
+			    }
+
+			    .logo {
+			        font-size: 1rem !important;
+			    }
+
+			    .nav-links {
+			        gap: 0.3rem !important;
+			        font-size: 0.7rem !important;
+			    }
+
+			    .page-header,
+			    .hero {
+			        padding: 2rem 1rem !important;
+			    }
+
+			    .page-header h1,
+			    .hero h1 {
+			        font-size: 1.4rem !important;
+			    }
+
+			    .modal-content,
+			    .login-container,
+			    .register-container {
+			        padding: 1rem !important;
+			    }
+
+			    .btn {
+			        padding: 0.8rem 1rem !important;
+			        font-size: 0.9rem !important;
+			    }
+			}
+		</style>
 		</head>
 		<body>
 		    <div class="login-container">
