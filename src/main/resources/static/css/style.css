@@ -1,8 +1,4 @@
-/* ============================================
-   Chef's Pantry - Unified Responsive Styles
-   ============================================ */
 
-/* Global Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -17,9 +13,7 @@ body {
     min-height: 100vh;
 }
 
-/* ============================================
-   Navigation Styles
-   ============================================ */
+/* Navigation */
 nav {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 1rem 0;
@@ -43,11 +37,6 @@ nav {
     font-weight: bold;
     color: white;
     text-decoration: none;
-    transition: opacity 0.3s;
-}
-
-.logo:hover {
-    opacity: 0.9;
 }
 
 .nav-links {
@@ -62,28 +51,25 @@ nav {
     text-decoration: none;
     font-weight: 500;
     transition: opacity 0.3s;
-    font-size: 1rem;
 }
 
 .nav-links a:hover {
     opacity: 0.8;
 }
 
-.user-info,
-.admin-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: white;
+.admin-badge,
+.user-info {
     background: rgba(255,255,255,0.2);
     padding: 0.5rem 1rem;
     border-radius: 20px;
+    color: white;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-/* ============================================
-   Hero Section
-   ============================================ */
+/* Hero Section */
 .hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -104,6 +90,13 @@ nav {
     animation: fadeInUp 1s ease 0.2s backwards;
 }
 
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    animation: fadeInUp 1s ease 0.4s backwards;
+}
+
 .page-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -121,23 +114,21 @@ nav {
     opacity: 0.9;
 }
 
-/* ============================================
-   Buttons
-   ============================================ */
+/* Buttons */
 .btn,
 .btn-primary,
 .subscribe-btn {
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    font-size: 1.1rem;
     border: none;
     border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: bold;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
     transition: transform 0.3s, box-shadow 0.3s;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: bold;
     text-align: center;
 }
 
@@ -155,22 +146,24 @@ nav {
 }
 
 .btn-edit {
-    background: #3b82f6;
+    flex: 1;
     padding: 0.7rem;
-    border-radius: 8px;
+    background: #3b82f6;
     color: white;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 500;
 }
 
 .btn-delete,
 .btn-cancel {
-    background: #ef4444;
+    flex: 1;
     padding: 0.7rem;
-    border-radius: 8px;
+    background: #ef4444;
     color: white;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 500;
 }
@@ -183,13 +176,6 @@ nav {
 .btn-resume {
     background: #10b981;
     color: white;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    animation: fadeInUp 1s ease 0.4s backwards;
 }
 
 .action-btn {
@@ -208,14 +194,12 @@ nav {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* ============================================
-   Containers & Sections
-   ============================================ */
+/* Containers */
 .container,
 .dashboard-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
 }
 
 .section {
@@ -238,25 +222,7 @@ nav {
     color: #333;
 }
 
-/* ============================================
-   Grid Layouts
-   ============================================ */
-.feature-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.mealkits-grid,
-.meal-kits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
+/* Grids */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -264,9 +230,25 @@ nav {
     margin-bottom: 3rem;
 }
 
+.feature-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.mealkits-grid,
+.meal-kits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
 .steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
 }
 
@@ -275,11 +257,9 @@ nav {
     gap: 1.5rem;
 }
 
-/* ============================================
-   Cards
-   ============================================ */
-.feature-card,
-.stat-card {
+/* Cards */
+.stat-card,
+.feature-card {
     background: white;
     padding: 2rem;
     border-radius: 15px;
@@ -288,24 +268,23 @@ nav {
     transition: transform 0.3s;
 }
 
-.feature-card:hover,
-.stat-card:hover {
+.stat-card:hover,
+.feature-card:hover {
     transform: translateY(-10px);
 }
 
-.meal-kit-card,
-.mealkit-card {
+.mealkit-card,
+.meal-kit-card {
     background: white;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s;
 }
 
-.meal-kit-card:hover,
-.mealkit-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+.mealkit-card:hover,
+.meal-kit-card:hover {
+    transform: translateY(-5px);
 }
 
 .subscription-card {
@@ -319,19 +298,16 @@ nav {
     align-items: center;
 }
 
-/* ============================================
-   Card Content
-   ============================================ */
-.meal-kit-image,
-.mealkit-image {
+/* Card Content */
+.mealkit-image,
+.meal-kit-image {
     width: 100%;
-    height: 250px;
+    height: 200px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 4rem;
-    color: white;
 }
 
 .subscription-icon {
@@ -345,9 +321,23 @@ nav {
     border-radius: 15px;
 }
 
-.meal-kit-content,
-.mealkit-content {
+.mealkit-content,
+.meal-kit-content {
     padding: 1.5rem;
+}
+
+.mealkit-content h3,
+.meal-kit-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.mealkit-content p,
+.meal-kit-description {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
 }
 
 .meal-kit-category,
@@ -362,25 +352,10 @@ nav {
     margin-bottom: 0.5rem;
 }
 
-.meal-kit-title,
-.mealkit-title {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #333;
-}
-
-.meal-kit-description,
-.mealkit-description {
-    color: #666;
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    min-height: 48px;
-}
-
-.meal-kit-meta,
-.mealkit-meta {
+.mealkit-meta,
+.meal-kit-meta {
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
     margin-bottom: 1rem;
     font-size: 0.9rem;
     color: #666;
@@ -392,10 +367,10 @@ nav {
     gap: 0.3rem;
 }
 
+.price,
 .meal-kit-price,
-.mealkit-price,
-.price {
-    font-size: 1.8rem;
+.mealkit-price {
+    font-size: 1.5rem;
     font-weight: bold;
     color: #667eea;
     margin-bottom: 1rem;
@@ -404,20 +379,12 @@ nav {
 .mealkit-actions {
     display: flex;
     gap: 0.5rem;
-    padding: 0 1.5rem 1.5rem;
 }
 
-.mealkit-actions button,
-.mealkit-actions form {
-    flex: 1;
-}
-
-/* ============================================
-   Statistics & Info
-   ============================================ */
+/* Stats & Info */
 .stat-icon,
 .feature-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
 }
 
@@ -456,9 +423,7 @@ nav {
     margin-bottom: 0.5rem;
 }
 
-/* ============================================
-   Subscription Details
-   ============================================ */
+/* Subscription Details */
 .subscription-details h3 {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
@@ -489,9 +454,7 @@ nav {
     gap: 0.5rem;
 }
 
-/* ============================================
-   Badges & Status
-   ============================================ */
+/* Badges */
 .badge,
 .status-badge {
     display: inline-block;
@@ -519,14 +482,13 @@ nav {
     color: #721c24;
 }
 
-/* ============================================
-   Forms
-   ============================================ */
+/* Forms */
 .form-group {
     margin-bottom: 1.5rem;
 }
 
-.form-group label {
+.form-group label,
+label {
     display: block;
     margin-bottom: 0.5rem;
     color: #333;
@@ -569,9 +531,7 @@ select:focus {
     gap: 1rem;
 }
 
-/* ============================================
-   Modals
-   ============================================ */
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -618,9 +578,7 @@ select:focus {
     color: #000;
 }
 
-/* ============================================
-   Auth Pages (Login/Register)
-   ============================================ */
+/* Auth Pages */
 body:has(.login-container),
 body:has(.register-container),
 body:has(.choice-container) {
@@ -638,7 +596,7 @@ body:has(.choice-container) {
     padding: 3rem;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    max-width: 500px;
+    max-width: 450px;
     width: 100%;
     animation: slideUp 0.5s ease;
 }
@@ -661,7 +619,6 @@ body:has(.choice-container) {
     text-decoration: none;
     transition: transform 0.3s, box-shadow 0.3s;
     border: 3px solid transparent;
-    text-align: center;
 }
 
 .login-card:hover {
@@ -699,9 +656,7 @@ body:has(.choice-container) {
     width: fit-content;
 }
 
-/* ============================================
-   Alerts & Messages
-   ============================================ */
+/* Alerts */
 .alert {
     padding: 1rem;
     border-radius: 10px;
@@ -731,9 +686,7 @@ body:has(.choice-container) {
     font-size: 0.9rem;
 }
 
-/* ============================================
-   Tables
-   ============================================ */
+/* Tables */
 .table-container {
     overflow-x: auto;
 }
@@ -763,9 +716,7 @@ tbody tr:hover {
     background: #f9fafb;
 }
 
-/* ============================================
-   Empty States
-   ============================================ */
+/* Empty States */
 .empty-state {
     text-align: center;
     padding: 4rem 2rem;
@@ -779,9 +730,7 @@ tbody tr:hover {
     margin-bottom: 1rem;
 }
 
-/* ============================================
-   Welcome & Page Headers
-   ============================================ */
+/* Welcome Section */
 .welcome-section {
     background: white;
     padding: 2rem;
@@ -800,41 +749,23 @@ tbody tr:hover {
     color: #666;
 }
 
-.page-header {
-    margin-bottom: 2rem;
-}
-
-.page-header h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 0.5rem;
-}
-
-.page-header p {
-    color: #666;
-    font-size: 1.1rem;
-}
-
-/* ============================================
-   Miscellaneous
-   ============================================ */
-h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 0.5rem;
-}
-
+/* Typography */
 h1 {
     color: #333;
     margin-bottom: 0.5rem;
     font-size: 2rem;
 }
 
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
 .subtitle {
     text-align: center;
     color: #666;
     margin-bottom: 2rem;
-    font-size: 1.1rem;
 }
 
 .signup-link,
@@ -877,9 +808,7 @@ h1 {
     color: #999;
 }
 
-/* ============================================
-   Features Section
-   ============================================ */
+/* Features */
 .features {
     padding: 5rem 2rem;
     background: #f9fafb;
@@ -902,9 +831,7 @@ h1 {
     color: #666;
 }
 
-/* ============================================
-   How It Works
-   ============================================ */
+/* How It Works */
 .how-it-works {
     padding: 5rem 2rem;
     max-width: 1200px;
@@ -918,9 +845,7 @@ h1 {
     color: #667eea;
 }
 
-/* ============================================
-   Footer
-   ============================================ */
+/* Footer */
 footer {
     background: #2d3748;
     color: white;
@@ -928,9 +853,7 @@ footer {
     padding: 2rem;
 }
 
-/* ============================================
-   Animations
-   ============================================ */
+/* Animations */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -954,14 +877,16 @@ footer {
 }
 
 /* ============================================
-   MOBILE RESPONSIVE STYLES
+   MOBILE RESPONSIVE STYLES ONLY
+   Desktop remains unchanged above
    ============================================ */
 
 @media (max-width: 768px) {
-    /* Navigation */
+    /* Navigation Mobile */
     .nav-container {
         padding: 0 1rem;
         flex-wrap: wrap;
+        gap: 0.5rem;
     }
     
     .logo {
@@ -969,10 +894,10 @@ footer {
     }
     
     .nav-links {
-        gap: 1rem;
-        font-size: 0.85rem;
-        flex-wrap: wrap;
+        width: 100%;
         justify-content: center;
+        gap: 0.8rem;
+        font-size: 0.85rem;
     }
     
     .nav-links a {
@@ -981,11 +906,15 @@ footer {
     
     .user-info,
     .admin-badge {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
     }
     
-    /* Hero & Headers */
+    /* Hero & Headers Mobile */
+    .hero {
+        padding: 3rem 1rem;
+    }
+    
     .hero h1 {
         font-size: 2rem;
     }
@@ -994,8 +923,8 @@ footer {
         font-size: 1rem;
     }
     
-    .hero {
-        padding: 3rem 1rem;
+    .page-header {
+        padding: 2rem 1rem;
     }
     
     .page-header h1 {
@@ -1006,14 +935,9 @@ footer {
         font-size: 1rem;
     }
     
-    .page-header {
-        padding: 2rem 1rem;
-    }
-    
-    /* Buttons */
+    /* Buttons Mobile */
     .cta-buttons {
         flex-direction: column;
-        gap: 1rem;
     }
     
     .btn,
@@ -1023,16 +947,15 @@ footer {
         font-size: 1rem;
     }
     
-    /* Containers */
+    /* Containers Mobile */
     .container,
     .dashboard-container {
         padding: 2rem 1rem;
     }
     
-    /* Grids */
+    /* Grids Mobile */
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
     }
     
     .feature-grid {
@@ -1048,18 +971,14 @@ footer {
         grid-template-columns: 1fr;
     }
     
-    /* Section Headers */
+    /* Section Header Mobile */
     .section-header {
         flex-direction: column;
-        gap: 1rem;
         align-items: flex-start;
+        gap: 1rem;
     }
     
-    .section-title {
-        font-size: 1.5rem;
-    }
-    
-    /* Subscription Cards */
+    /* Subscription Card Mobile */
     .subscription-card {
         grid-template-columns: 1fr;
         text-align: center;
@@ -1068,6 +987,9 @@ footer {
     
     .subscription-icon {
         margin: 0 auto;
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
     }
     
     .subscription-actions {
@@ -1076,7 +998,7 @@ footer {
         flex-wrap: wrap;
     }
     
-    /* Meal Kit Actions */
+    /* Meal Kit Actions Mobile */
     .mealkit-actions {
         flex-direction: column;
     }
@@ -1090,12 +1012,12 @@ footer {
         width: 100%;
     }
     
-    /* Forms */
+    /* Form Mobile */
     .form-row {
         grid-template-columns: 1fr;
     }
     
-    /* Auth Pages */
+    /* Auth Pages Mobile */
     .login-container,
     .register-container,
     .choice-container {
@@ -1104,32 +1026,31 @@ footer {
     
     .login-options {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
     }
     
-    /* Modal */
+    /* Modal Mobile */
     .modal-content {
         width: 95%;
         margin: 10% auto;
         padding: 1.5rem;
     }
     
-    /* Tables */
+    /* Table Mobile */
     .table-container {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
     
-    th,
-    td {
-        padding: 0.7rem;
+    th, td {
+        padding: 0.6rem;
+        font-size: 0.85rem;
     }
     
-    /* Welcome Section */
+    /* Welcome Mobile */
     .welcome-section h1 {
         font-size: 1.5rem;
     }
     
-    /* Features */
+    /* Features Mobile */
     .features {
         padding: 3rem 1rem;
     }
@@ -1141,23 +1062,6 @@ footer {
     
     .how-it-works {
         padding: 3rem 1rem;
-    }
-    
-    /* Card Content */
-    .meal-kit-title,
-    .mealkit-title {
-        font-size: 1.3rem;
-    }
-    
-    .meal-kit-price,
-    .mealkit-price,
-    .price {
-        font-size: 1.5rem;
-    }
-    
-    /* Stat Cards */
-    .stat-value {
-        font-size: 2rem;
     }
 }
 
@@ -1172,26 +1076,16 @@ footer {
     }
     
     .hero h1 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
     
     .page-header h1 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
     
-    .section-title {
-        font-size: 1.3rem;
-    }
-    
-    .meal-kit-image,
-    .mealkit-image {
-        height: 200px;
+    .mealkit-image,
+    .meal-kit-image {
+        height: 180px;
         font-size: 3rem;
-    }
-    
-    .subscription-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 2rem;
     }
 }
